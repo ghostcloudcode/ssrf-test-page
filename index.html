@@ -2,17 +2,37 @@
 <html>
 <head><title>T</title></head>
 <body>
-<h1>IPv6 Test</h1>
+<h1>XHR Test</h1>
 <div id="j">JS_NOT_EXECUTED</div>
-<div id="r1">WAITING</div>
-<div id="r2">WAITING</div>
-<div id="r3">WAITING</div>
+<div id="r1">XHR_WAITING</div>
+<div id="r2">XHR_WAITING</div>
+<div id="r3">XHR_WAITING</div>
 <script>
 document.getElementById("j").textContent="JS_EXECUTED_49";
-function f(u,e,l){var x=new XMLHttpRequest();x.open("GET",u,false);x.timeout=5000;try{x.send();document.getElementById(e).textContent=l+":S"+x.status+" "+x.responseText.substring(0,3000);}catch(r){document.getElementById(e).textContent=l+"_ERR:"+r.message;}}
-f("http://[fd00:ec2::254]/latest/meta-data/","r1","IMDS6");
-f("http://httpbin.org/anything","r2","HTTPBIN");
-f("https://example.com/","r3","EXAMPLE");
+var done=0;
+function f(u,e,l){
+  var x=new XMLHttpRequest();
+  x.onreadystatechange=function(){
+    if(x.readyState===4){
+      document.getElementById(e).textContent=l+":S"+x.status+" B:"+x.responseText.substring(0,500);
+      done++;
+    }
+  };
+  x.onerror=function(){
+    document.getElementById(e).textContent=l+"_NETERR";
+    done++;
+  };
+  x.ontimeout=function(){
+    document.getElementById(e).textContent=l+"_TIMEOUT";
+    done++;
+  };
+  x.timeout=4000;
+  x.open("GET",u);
+  x.send();
+}
+f("https://httpbin.org/get","r1","HTTPBIN");
+f("https://example.com/","r2","EXAMPLE");
+f("http://httpbin.org/get","r3","HTTP_HTTPBIN");
 </script>
 </body>
 </html>
