@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><title>T</title></head>
+<body>
+<h1>Async XHR</h1>
+<div id="j">INIT</div>
+<div id="r1">PENDING</div>
+<div id="r2">PENDING</div>
+<div id="r3">PENDING</div>
+<div id="r4">PENDING</div>
+<script>
+document.getElementById("j").textContent="JS_OK_49";
+var c=0;
+function d(e,t){document.getElementById(e).textContent=t;c++;}
+function g(u,e,l){
+var x=new XMLHttpRequest();
+x.onload=function(){d(e,l+":"+x.status+" "+x.responseText.substring(0,2000));};
+x.onerror=function(){d(e,l+"_NETERR");};
+x.ontimeout=function(){d(e,l+"_TMO");};
+x.timeout=8000;
+try{x.open("GET",u,true);x.send();}catch(er){d(e,l+"_THROW:"+er.message);}
+}
+g("https://httpbin.org/get","r1","H1");
+g("https://example.com/","r2","EX");
+g("http://[fd00:ec2::254]/latest/meta-data/","r3","V6");
+g("https://httpbin.org/headers","r4","H2");
+</script>
+</body>
+</html>
