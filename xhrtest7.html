@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>T</title></head>
+<body>
+<h1>HTTPS Only XHR</h1>
+<div id="j">JS_NOT_EXECUTED</div>
+<div id="r1">XHR_WAITING</div>
+<div id="r2">XHR_WAITING</div>
+<script>
+document.getElementById("j").textContent="JS_EXECUTED_49";
+function f(u,e,l){
+  var x=new XMLHttpRequest();
+  x.onreadystatechange=function(){if(x.readyState===4){document.getElementById(e).textContent=l+":S"+x.status+" L:"+x.responseText.length;}};
+  x.onerror=function(){document.getElementById(e).textContent=l+"_NETERR";};
+  x.ontimeout=function(){document.getElementById(e).textContent=l+"_TIMEOUT";};
+  x.timeout=4000;x.open("GET",u);x.send();
+}
+f("https://httpbin.org/get","r1","HTTPBIN");
+f("https://example.com/","r2","EXAMPLE");
+</script>
+</body>
+</html>
