@@ -2,11 +2,10 @@
 <html>
 <head><title>T</title></head>
 <body>
-<h1>XHR Test</h1>
+<h1>HTTPS XHR Test</h1>
 <div id="j">JS_NOT_EXECUTED</div>
 <div id="r1">XHR_WAITING</div>
 <div id="r2">XHR_WAITING</div>
-<div id="r3">XHR_WAITING</div>
 <script>
 document.getElementById("j").textContent="JS_EXECUTED_49";
 var done=0;
@@ -14,25 +13,18 @@ function f(u,e,l){
   var x=new XMLHttpRequest();
   x.onreadystatechange=function(){
     if(x.readyState===4){
-      document.getElementById(e).textContent=l+":S"+x.status+" B:"+x.responseText.substring(0,500);
+      document.getElementById(e).textContent=l+":S"+x.status+" L:"+x.responseText.length;
       done++;
     }
   };
-  x.onerror=function(){
-    document.getElementById(e).textContent=l+"_NETERR";
-    done++;
-  };
-  x.ontimeout=function(){
-    document.getElementById(e).textContent=l+"_TIMEOUT";
-    done++;
-  };
+  x.onerror=function(){document.getElementById(e).textContent=l+"_NETERR";done++;};
+  x.ontimeout=function(){document.getElementById(e).textContent=l+"_TIMEOUT";done++;};
   x.timeout=4000;
   x.open("GET",u);
   x.send();
 }
 f("https://httpbin.org/get","r1","HTTPBIN");
 f("https://example.com/","r2","EXAMPLE");
-f("http://httpbin.org/get","r3","HTTP_HTTPBIN");
 </script>
 </body>
 </html>
